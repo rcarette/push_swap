@@ -1,49 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_in_sorted.c                                   :+:      :+:    :+:   */
+/*   ft_getsmall_value.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/26 15:45:29 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/02 16:23:25 by rcarette         ###   ########.fr       */
+/*   Created: 2017/05/02 11:16:43 by rcarette          #+#    #+#             */
+/*   Updated: 2017/05/02 17:51:29 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-int		is_sorted(t_push *list_a)
+
+int			ft_getsmall_value(t_push *list)
 {
 	int		data;
-
-	if (lenght_list(list_a) == 0)
-		return (0);
-	else if (lenght_list(list_a) == 1)
-		return (0);
-	while (list_a->next)
+	
+	data = list->value;
+	while (list)
 	{
-		data = list_a->value;
-		list_a = list_a->next;
-		if (data > list_a->value)
-			return (1);
+		if (data > list->value)
+			data = list->value;
+		list = list->next;
 	}
-	return (0);
+	return (data);
 }
 
-int		is_sorted_desc(t_push *list)
+int			ft_getbig_value(t_push *list)
 {
 	int		data;
-
-	if (lenght_list(list) == 0)
-		return (0);
-	else if (lenght_list(list) == 1)
-		return (0);
-	while (list->next)
+	
+	data = list->value;
+	while (list)
 	{
-		data = list->value;
-		list = list->next;
 		if (data < list->value)
-			return (1);
+			data = list->value;
+		list = list->next;
 	}
-	return (0);
+	return (data);
+}
+
+t_push		*dupliq(t_push *list)
+{
+	t_push		*new_list;
+
+	new_list = NULL;
+	while (list)
+	{
+		push_back(&new_list, list->value);
+		list = list->next;
+	}
+	return (new_list);
 }

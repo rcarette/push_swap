@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 13:01:59 by rcarette          #+#    #+#             */
-/*   Updated: 2017/04/26 11:30:38 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/02 12:29:18 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,16 @@ static int			check_middle(t_push **list, int data)
 	t_push		*next;
 	
 	temporary = *list;
-	while (temporary->next)
+	while (temporary)
 	{
-		prev = temporary;
 		next = temporary->next;
-		if ((*list)->value == data)
+		if (temporary->value == data)
 		{
-			free(temporary);
 			prev->next = next;
+			free(temporary);
 			return (1);
 		}
+		prev = temporary;
 		temporary = temporary->next;
 	}
 	return (0);

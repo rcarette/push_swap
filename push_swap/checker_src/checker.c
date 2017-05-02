@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 11:37:24 by rcarette          #+#    #+#             */
-/*   Updated: 2017/04/30 17:40:43 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/02 18:13:12 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,10 @@ static void		ft_get_directive(t_push **list_a, t_push **list_b)
 		directive = NULL;
 		++i_coups;
 	}
-	if (is_sorted(*list_a))
+	if (!(is_sorted(*list_a)))
 		messag(GREEN, 1, i_coups);
 	else
 		messag(RED, 0, i_coups);
-	print_list(*list_a);
-	if (is_sorted(*list_a))
-		printf("Hello\n");
 }
 
 int				main(int argc, const char *argv[])

@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 11:46:18 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/01 12:48:46 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/02 19:23:39 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@
 int					get_arguments(const char **av, t_push **list);
 void				ft_exit(t_push **push);
 int					is_sorted(t_push *list_a);
-int					ft_getmediane(t_push **list);
+int					is_sorted_desc(t_push *list);
+int					ft_get_mediane(t_push *list, int choice);
+int					ft_getlast_elem(t_push *list_a);
+int					ft_getbig_value(t_push *list);
+t_push				*ft_getdata_position(t_push *list, int data);
 
 /*
  * INSTRUCTION
@@ -44,7 +48,8 @@ void			ft_reverse_rotate_rrr(t_push **list_a, t_push **list_b);
 /*
  * TOOLS
  */
-int		ft_getsmall_position(t_push *list_a);
-int		ft_getbig_position(t_push *list_a);
-int		ft_getbefore_last(t_push *list_a, int small_position);
+int			ft_getsmall_position(t_push *list_a);
+int			ft_getsmall_value(t_push *list);
+int			ft_getbig_position(t_push *list_a);
+t_push		*dupliq(t_push *list);
 #endif

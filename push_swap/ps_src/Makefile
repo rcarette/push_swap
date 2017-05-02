@@ -6,12 +6,12 @@
 #    By: rcarette <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/26 12:04:47 by rcarette          #+#    #+#              #
-#    Updated: 2017/05/01 14:10:59 by rcarette         ###   ########.fr        #
+#    Updated: 2017/05/02 18:01:06 by rcarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
-FLAGS = -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -g -Wall -Wextra -Werror
 CC = clang $(FLAGS)
 INC = ../../include
 LIBFT = ../libft/
@@ -27,6 +27,10 @@ SRCS = push_swap.c\
 	   ../checker_src/is_sorted.c\
 
 TOOLS = ../tools/ft_getsmall_position.c\
+		../tools/ft_getsmall_value.c\
+		../tools/ft_getmedian.c\
+		../tools/ft_getdata_position.c\
+		../tools/ft_getlast_elem.c\
 
 OBJS = $(SRCS:%.c=%.o)
 
