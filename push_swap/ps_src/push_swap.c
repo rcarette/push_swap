@@ -6,35 +6,11 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 11:46:42 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/02 22:47:08 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/03 16:10:13 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
-
-void			ft_tree_elements(t_push **list_a, t_push **list_b)
-{
-	int		big_position;
-
-	big_position = ft_getbig_position(*list_a);
-	if (big_position == 1)
-	{
-		ft_rotate(list_a, list_b, 0);
-		if ((*list_a)->value > (*list_a)->next->value)
-			swap_pile(list_a, 0);
-	}
-	else if (big_position == 2)
-	{
-		ft_reverse_rotate(list_a, list_b, 0);
-		if ((*list_a)->value > (*list_a)->next->value)
-			swap_pile(list_a, 0);
-	}
-	else
-	{
-		if ((*list_a)->value > (*list_a)->next->value)
-			swap_pile(list_a, 0);
-	}
-}
 
 void			init_rotate(t_push **list)
 {
@@ -115,86 +91,61 @@ void			ft_resolve(t_push **list_a, t_push **list_b, int choice)
 			push(list_a, list_b, 0);
 		if ((*list_a)->value != median)
 			ft_reverse_rotate(list_a, list_b, 1);
-		if (lenght_list(*list_a) == 3 || lenght_list(*list_a) == 2)
-			ft_tree_elements(list_a, list_b);
+		/*if (lenght_list(*list_a) == 3 || lenght_list(*list_a) == 2)
+			ft_tree_elements(list_a, list_b);*/
 		if (!(is_sorted(*list_a)))
 			break ;
 	}
 	transfer_pile(list_a, list_b);
 }
 
-void			ft_five_elements(t_push **list_a, t_push **list_b)
+void			ft_start_pushswap(t_push **list_a, t_push **list_b, t_opt *opt)
 {
-	int		big_position;
-
-	big_position = ft_getbig_position(*list_a);
-	if (big_position == 1)
-		ft_rotate(list_a, list_b, 0);
-	else if (big_position == 2)
+	int		*board;
+	int		size_elements;
+	
+	size_elements = lenght_list(*list_a);
+	board = transforms_list_to_array(*list_a);
+	if (opt->descending == 1)
 	{
-		push(list_a, list_b, 0);
-		ft_rotate(list_a, list_b, 0);
+		if (is_sorted_descending_array(board, size_elements))
+			return (free(board)) ;
+		free(board);
+		ft_start_descending(list_a, list_b);
 	}
-	else if (big_position == 3)
-		ft_reverse_rotate(list_a, list_b, 0);
-	else if (big_position == 4)
-		ft_reverse_rotate(list_a, list_b, 0);
-	while (lenght_list(*list_a) > 1)
-		push(list_a, list_b, 0);
-	while (lenght_list(*list_b) != 2)
+	else if (opt->descending == 0)
 	{
-		big_position = ft_getbig_position(*list_b);
-
-		if (big_position == 1)
-			push(list_a, list_b, 1);
-		else if (big_position == 2)
-		{
-			ft_reverse_rotate(list_a, list_b, 1);
-			push(list_a, list_b, 1);
-		}
-		else if (big_position == 3)
-		{
-			ft_reverse_rotate(list_a, list_b, 1);
-			ft_reverse_rotate(list_a, list_b, 1);
-			push(list_a, list_b, 1);
-		}
-		else if (big_position == 4)
-		{
-			ft_reverse_rotate(list_a, list_b, 1);
-			push(list_a, list_b, 1);
-		}
+		if (is_sorted_ascending_array(board, size_elements))
+			return (free(board));
+		free(board);
+		ft_start_ascending(list_a, list_b);
 	}
-	/*if ((*list_b)->value < (*list_b)->next->value)
-		swap_pile(list_b, 1);
-	push(list_a, list_b, 1);
-	push(list_a, list_b, 1);*/
-
 }
 
 int				main(int argc, const char *argv[])
 {
 	t_push		*list_a;
 	t_push		*list_b;
+	t_opt		opt;
+	int			returns;
 	int			i;
 
+	init_opt(&opt);
 	i = -1;
 	list_a = NULL;
 	list_b = NULL;
 	if (argc == 1)
 		return (0);
 	else if (argc > 1)
-		if (!get_arguments(argv, &list_a))
+	{
+		returns = get_arguments(argv, &list_a, &opt);
+		if (returns == 0)
 			ft_exit(&list_a);
-	if (!list_a || lenght_list(list_a) == 0)
-		return (0);
-	i = (lenght_list(list_a) > 150) ? 2 : 1;
-	if ((lenght_list(list_a) == 3  || lenght_list(list_a) == 2))
-		ft_tree_elements(&list_a, &list_b);
-	else if (lenght_list(list_a) == 5)
-		ft_five_elements(&list_a, &list_b);
-	print_list(list_a);
-	/*else
-		ft_resolve(&list_a, &list_b, i);*/
+		else if (returns == -1)
+			ft_usage(&list_a);
+		check_option(&opt);
+	}
+	ft_start_pushswap(&list_a, &list_b, &opt);
 	(list_a != NULL) ? clear_list(&list_a) : 0;
 	(list_b != NULL) ? clear_list(&list_b) : 0;
 	return (0);

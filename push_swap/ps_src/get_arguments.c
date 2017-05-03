@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 12:12:38 by rcarette          #+#    #+#             */
-/*   Updated: 2017/04/28 18:25:58 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/03 12:05:12 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ static int		split_spaces(char *str, t_push **list)
 	long long		data;
 
 	ite = -1;
-	board = ft_strsplit(str, ' ');
+	if (!(board = ft_strsplit(str, ' ')))
+		return (0);
+	if (board[0] == NULL)
+		return (0);
 	while (board[++ite])
 	{
 		if (!(check_data(board[ite])))
@@ -61,18 +64,43 @@ static int		split_spaces(char *str, t_push **list)
 	return (1);
 }
 
-int				get_arguments(const char **av, t_push **list)
+static int		ft_getoption(char *str, t_opt *opt)
+{
+	int		ite;
+
+	ite = 0;
+	while (str[++ite])
+	{
+		if (str[ite] == 'd')
+			opt->descending = 1;
+		else if (str[ite] == 't')
+			opt->time = 1;
+		else if (str[ite] == 'v')
+			opt->visualization = 1;
+		else if (str[ite] == 'i')
+			opt->instruc = 1;
+		else
+			return (-1);
+	}
+	return (1);
+}
+
+int				get_arguments(const char **av, t_push **list, t_opt *opt)
 {
 	int				ite;
 	long long		data;
 
 	ite = 0;
+	(void)opt;
 	while (av[++ite])
 	{
-		if (ft_strlen(av[ite]) == 0)
-		{
-			printf("Passage\n");
+		if (ft_strlen((char *)av[ite]) == 1 && !ft_isdigit(av[ite][1]))
 			return (0);
+		else if (av[ite][0] == '-' && ft_isalpha(av[ite][1]))
+		{
+			if (ft_getoption((char *)av[ite], opt) == -1)
+				return (-1);
+			continue ;
 		}
 		if (ft_strchr(av[ite], ' '))
 		{

@@ -6,7 +6,7 @@
 #    By: rcarette <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/26 12:16:43 by rcarette          #+#    #+#              #
-#    Updated: 2017/04/28 15:51:07 by rcarette         ###   ########.fr        #
+#    Updated: 2017/05/03 15:56:02 by rcarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ SRCS = checker.c\
 	   ../instruction/push.c\
 	   ../instruction/swap_pile.c\
 	   is_sorted.c\
+	   ../tools/init_opt.c\
+	   ../tools/ft_usage.c\
 
 OBJS = $(SRCS:%.c=%.o)
 

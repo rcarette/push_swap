@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/13 02:51:56 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/01 12:46:48 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/03 10:53:43 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,13 @@ char				*ft_strndup_x(char *line_command, char character);
 void				push_char(char *buff, char character, int *ite);
 char				**strsplit(char *s1, char character);
 void				ft_putendl(char *str);
+int					returns_small_value_array(int *board, int size);
+int					returns_big_value_array(int *board, int size);
+int					returns_pos_array(int *board, int size, int data);
+int					returns_last_array(int *board, int size);
+int					*transforms_list_to_array(void *list);
+int					is_sorted_array(int *board, int size);
+void				print_array(int *board, int size);
+int					is_sorted_ascending_array(int *board, int size);
+int					is_sorted_descending_array(int *board, int size);
 #endif

@@ -6,7 +6,7 @@
 #    By: rcarette <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/26 12:04:47 by rcarette          #+#    #+#              #
-#    Updated: 2017/05/02 18:01:06 by rcarette         ###   ########.fr        #
+#    Updated: 2017/05/03 16:02:57 by rcarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,16 @@ SRCS = push_swap.c\
 	   ../instruction/push.c\
 	   ../instruction/swap_pile.c\
 	   ../checker_src/is_sorted.c\
+	   ../ps_src/ft_start_ascending.c\
+	   ../ps_src/ft_start_descending.c\
 
 TOOLS = ../tools/ft_getsmall_position.c\
 		../tools/ft_getsmall_value.c\
 		../tools/ft_getmedian.c\
 		../tools/ft_getdata_position.c\
 		../tools/ft_getlast_elem.c\
+		../tools/init_opt.c\
+		../tools/ft_usage.c\
 
 OBJS = $(SRCS:%.c=%.o)
 

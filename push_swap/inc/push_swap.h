@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 11:46:18 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/02 19:23:39 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/03 16:02:18 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,17 @@
 # define RED "\033[31;1m"
 # define GREEN "\033[32;1m"
 
+typedef struct		s_opt
+{
+	char			descending;
+	char			instruc;
+	char			time;
+	char			visualization;
 
-int					get_arguments(const char **av, t_push **list);
+}					t_opt;
+
+
+int					get_arguments(const char **av, t_push **list, t_opt *opt);
 void				ft_exit(t_push **push);
 int					is_sorted(t_push *list_a);
 int					is_sorted_desc(t_push *list);
@@ -27,6 +36,8 @@ int					ft_getlast_elem(t_push *list_a);
 int					ft_getbig_value(t_push *list);
 t_push				*ft_getdata_position(t_push *list, int data);
 
+void				ft_start_ascending(t_push **list_a, t_push **list_b);
+void				ft_start_descending(t_push **list_a, t_push **list_b);
 /*
  * INSTRUCTION
  */
@@ -52,4 +63,7 @@ int			ft_getsmall_position(t_push *list_a);
 int			ft_getsmall_value(t_push *list);
 int			ft_getbig_position(t_push *list_a);
 t_push		*dupliq(t_push *list);
+void		init_opt(t_opt *opt);
+void		ft_usage(t_push **list_a);
+void		check_option(t_opt *opt);
 #endif

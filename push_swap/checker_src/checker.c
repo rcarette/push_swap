@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 11:37:24 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/02 18:13:12 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/03 16:50:41 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,14 @@ static void		ft_exit_checker(t_push **list_a, t_push **list_b)
 	exit(0);
 }
 
-static void		messag(char *str, int choice, long long nbr_coup)
+static void		messag(char *str, int choice, long long nbr_coup, t_opt *opt)
 {
-	write(1, "Intruction(s) : (", 17);
-	ft_putnbr(nbr_coup);
-	write(1, ") >> ", 5);
+	if (opt->instruc)
+	{
+		write(1, "Intruction(s) : (", 17);
+		ft_putnbr(nbr_coup);
+		write(1, ") >> ", 5);
+	}
 	(choice == 1) ? write(1, str, ft_strlen(str)) : 0;
 	(choice == 1) ? write(1, "OK\n", 3) : 0;
 	(choice == 0) ? write(1, str, ft_strlen(str)) : 0;
@@ -65,7 +68,29 @@ static void		ft_start_directive(const char *directive, t_push **list_a,\
 
 }
 
-static void		ft_get_directive(t_push **list_a, t_push **list_b)
+void			check_if_sorted(t_push **list_a, t_opt *opt, int i_coups)
+{
+	int		*board;
+
+	board = transforms_list_to_array(*list_a);
+	if (opt->descending)
+	{
+		if (is_sorted_descending_array(board, lenght_list(*list_a)))
+			messag(GREEN, 1, i_coups, opt);
+		else
+			messag(RED, 0, i_coups, opt);
+	}
+	else
+	{
+		if (is_sorted_ascending_array(board, lenght_list(*list_a)))
+			messag(GREEN, 1, i_coups, opt);
+		else
+			messag(RED, 0, i_coups, opt);
+	}
+	free(board);
+}
+
+static void		ft_get_directive(t_push **list_a, t_push **list_b, t_opt *opt)
 {
 	char			*directive;
 	long long		i_coups;
@@ -80,27 +105,33 @@ static void		ft_get_directive(t_push **list_a, t_push **list_b)
 		directive = NULL;
 		++i_coups;
 	}
-	if (!(is_sorted(*list_a)))
-		messag(GREEN, 1, i_coups);
-	else
-		messag(RED, 0, i_coups);
+	check_if_sorted(list_a, opt, i_coups);
 }
 
 int				main(int argc, const char *argv[])
 {
 	t_push		*list_a;
 	t_push		*list_b;
+	t_opt		opt;
+	int			returns;
+	int			i;
 
+	init_opt(&opt);
+	i = -1;
 	list_a = NULL;
 	list_b = NULL;
 	if (argc == 1)
 		return (0);
 	else if (argc > 1)
-		if (!get_arguments(argv, &list_a))
+	{
+		returns = get_arguments(argv, &list_a, &opt);
+		if (returns == 0)
 			ft_exit(&list_a);
-	if (!list_a)
-		return (0);
-	ft_get_directive(&list_a, &list_b);
+		else if (returns == -1)
+			ft_usage(&list_a);
+		check_option(&opt);
+	}
+	ft_get_directive(&list_a, &list_b, &opt);
 	(list_a != NULL) ? clear_list(&list_a) : 0;
 	(list_b != NULL) ? clear_list(&list_b) : 0;
 	return (0);
