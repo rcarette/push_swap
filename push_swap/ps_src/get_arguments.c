@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 12:12:38 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/03 12:05:12 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/03 22:45:50 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int				get_arguments(const char **av, t_push **list, t_opt *opt)
 	(void)opt;
 	while (av[++ite])
 	{
-		if (ft_strlen((char *)av[ite]) == 1 && !ft_isdigit(av[ite][1]))
+		if ((av[ite][0] == '-' || av[ite][0] == '+') && ft_strlen(av[ite]) == 1)
 			return (0);
 		else if (av[ite][0] == '-' && ft_isalpha(av[ite][1]))
 		{

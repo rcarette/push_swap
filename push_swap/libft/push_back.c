@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 12:52:14 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/01 12:49:46 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/03 22:34:27 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ t_push			*creat_new_list(int data)
 {
 	t_push		*new_link;
 
-	if (data > MAX_INT || data < MIN_INT)
-		return (NULL);
+	/*if (data > MAX_INT || data < MIN_INT)
+		return (NULL);*/
 	if (!(new_link = (t_push *)malloc(sizeof(t_push))))
 		exit(EXIT_FAILURE);
 	new_link->value = data;
