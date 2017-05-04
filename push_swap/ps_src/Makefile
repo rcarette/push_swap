@@ -6,7 +6,7 @@
 #    By: rcarette <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/26 12:04:47 by rcarette          #+#    #+#              #
-#    Updated: 2017/05/03 16:02:57 by rcarette         ###   ########.fr        #
+#    Updated: 2017/05/04 20:49:56 by rcarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS = push_swap.c\
 	   ../instruction/swap_pile.c\
 	   ../checker_src/is_sorted.c\
 	   ../ps_src/ft_start_ascending.c\
+	   ../ps_src/ft_resolve_ascending.c\
 	   ../ps_src/ft_start_descending.c\
 
 TOOLS = ../tools/ft_getsmall_position.c\

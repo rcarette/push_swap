@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 18:32:09 by rcarette          #+#    #+#             */
-/*   Updated: 2017/04/30 17:15:15 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/04 21:03:23 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static void		ft_rotate_a(t_push **list_a)
 	data = (*list_a)->value;
 	if_remove_list(list_a, data);
 	push_back(list_a, data);
-	write(1, "ra\n", 3);
 }
 
 static void		ft_rotate_b(t_push **list_b)
@@ -37,15 +36,12 @@ static void		ft_rotate_b(t_push **list_b)
 	data = (*list_b)->value;
 	if_remove_list(list_b, data);
 	push_back(list_b, data);
-	write(1, "rb\n", 3);
 }
 
 void			ft_rotate_rr(t_push **list_a, t_push **list_b)
 {
 	ft_rotate_a(list_a);
 	ft_rotate_b(list_b);
-	write(1, "ra\n", 3);
-	write(1, "rb\n", 3);
 }
 
 void			ft_rotate(t_push **list_a, t_push **list_b, int choice)

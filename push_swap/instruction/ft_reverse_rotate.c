@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 18:47:50 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/03 23:30:24 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/04 21:04:14 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void		ft_reverse_rotate_a(t_push **list_a)
 	data = temporary->value;
 	if_remove_list(list_a, data);
 	push_front(list_a, data);
-	write(1, "rra\n", 4);
 }
 
 static void		ft_reverse_rotate_b(t_push **list_b)
@@ -41,15 +40,12 @@ static void		ft_reverse_rotate_b(t_push **list_b)
 	data = temporary->value;
 	if_remove_list(list_b, data);
 	push_front(list_b, data);
-	write(1, "rrb\n", 4);
 }
 
 void			ft_reverse_rotate_rrr(t_push **list_a, t_push **list_b)
 {
 	ft_reverse_rotate_a(list_a);
 	ft_reverse_rotate_b(list_b);
-	write(1, "rrb\n", 4);
-	write(1, "rra\n", 4);
 }
 
 void			ft_reverse_rotate(t_push **list_a, t_push **list_b, int choice)

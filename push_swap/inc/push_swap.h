@@ -6,13 +6,15 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 11:46:18 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/03 16:02:18 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/05 01:15:20 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include "../libft/libft.h"
+# include <termios.h>
+# include <term.h>
 # define DEFAULT "\033[0;0m"
 # define RED "\033[31;1m"
 # define GREEN "\033[32;1m"
@@ -38,6 +40,11 @@ t_push				*ft_getdata_position(t_push *list, int data);
 
 void				ft_start_ascending(t_push **list_a, t_push **list_b);
 void				ft_start_descending(t_push **list_a, t_push **list_b);
+void				ft_resolve_ascending(t_push **list_a, t_push **list_b, \
+																	int choice);
+void				ft_tree_elements_ascending(t_push **list_a, \
+															t_push **list_b);
+void				ft_five_elements_ascending(t_push **list_a, t_push **list_b);
 /*
  * INSTRUCTION
  */
@@ -45,7 +52,7 @@ void				ft_start_descending(t_push **list_a, t_push **list_b);
 /*
  * sa - sb
 */
-void			swap_pile(t_push **pile, int choice);
+void			swap_pile(t_push **pile);
 /*
  * ss sa && sb
  */

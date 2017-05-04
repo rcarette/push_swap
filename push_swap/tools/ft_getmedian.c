@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 17:22:59 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/02 19:56:37 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/04 23:02:01 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ int			ft_get_mediane(t_push *list, int choice)
 		board[++i] = data;
 		if_remove_list(&temporary, data);
 	}
-	//median = ((1.0 / 63) * lenght_list(list) + 5.0 / 2.3) + 0.5;
 	(choice == 2) ? median = board[lenght_list(list) / 6] : 0;
-	(choice == 1) ? median = board[lenght_list(list) / 3] : 0;
+	(choice == 1) ? median = board[lenght_list(list) / 3 % lenght_list(list)] : 0;
 	free(board);
 	return (median);
 }

@@ -6,12 +6,12 @@
 #    By: rcarette <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/26 12:16:43 by rcarette          #+#    #+#              #
-#    Updated: 2017/05/03 15:56:02 by rcarette         ###   ########.fr        #
+#    Updated: 2017/05/05 01:24:50 by rcarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = checker
-FLAGS = -Wall -Wextra -Werror -fsanitize=address
+FLAGS =  -Wall -Wextra -Werror -fsanitize=address
 CC = clang $(FLAGS)
 INC = ../inc/
 LIBFT = ../libft/
@@ -35,10 +35,10 @@ OBJS = $(SRCS:%.c=%.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) -o $(NAME) $(SRCS) $(ALL_INC) -L $(LIBFT) -lft
+	$(CC) -ltermcap -o $(NAME) $(SRCS) $(ALL_INC) -L $(LIBFT) -lft
 
 %.o: %.c
-	$(CC) -o $@ -c $< $(ALL_INC)
+	$(CC) -ltermcap -o $@ -c $< $(ALL_INC)
 
 clean:
 	@make clean -C $(LIBFT)

@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 11:37:24 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/03 16:50:41 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/05 01:21:00 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,27 @@ static void		messag(char *str, int choice, long long nbr_coup, t_opt *opt)
 	write(1, "\n", 1);
 }
 
+void			visualization(t_push *list_a, t_push *list_b)
+{
+	(void)list_a;
+	(void)list_b;
+	write(1, "\033[32;1m", ft_strlen("\033[32;1m"));
+	write(1, "|    PILE A    |", 16);
+	write(1, "\033[0;0m", ft_strlen("\033[0;0m"));
+	write(1, "   ", 3);
+	write(1, "\033[31;1m", ft_strlen("\033[31;1m"));
+	write(1, "|    PILE B    |\n",17);
+	write(1, "\033[0;0m", ft_strlen("\033[0;0m"));
+	tputs(tgetstr("cl", NULL), 1, &ft_putchar);
+}
+
 static void		ft_start_directive(const char *directive, t_push **list_a,\
-															t_push **list_b)
+												t_push **list_b, t_opt *opt)
 {
 	if (!ft_strcmp(directive, "sa"))
-		swap_pile(list_a, 0);
+		swap_pile(list_a);
 	else if (!ft_strcmp(directive, "sb"))
-		swap_pile(list_b, 1);
+		swap_pile(list_b);
 	else if (!ft_strcmp(directive, "ss"))
 		swap_ss(list_a, list_b);
 	else if (!ft_strcmp(directive, "pa"))
@@ -65,7 +79,7 @@ static void		ft_start_directive(const char *directive, t_push **list_a,\
 		ft_reverse_rotate_rrr(list_a, list_b);
 	else
 		ft_exit_checker(list_a, list_b);
-
+	(opt->visualization == 1) ? visualization(*list_a, *list_b) : 0;
 }
 
 void			check_if_sorted(t_push **list_a, t_opt *opt, int i_coups)
@@ -100,7 +114,7 @@ static void		ft_get_directive(t_push **list_a, t_push **list_b, t_opt *opt)
 
 	while (get_next_line(0, &directive))
 	{
-		ft_start_directive(directive, list_a, list_b);
+		ft_start_directive(directive, list_a, list_b, opt);
 		(directive != NULL) ? ft_memdel((void *)&directive) : 0;
 		directive = NULL;
 		++i_coups;
@@ -115,7 +129,15 @@ int				main(int argc, const char *argv[])
 	t_opt		opt;
 	int			returns;
 	int			i;
+	struct termios		term;
 
+	if (!(tgetent(NULL, getenv("TERM"))))
+		return (-1);
+	if ((tcgetattr(0, &term)) == -1)
+		return (-1);
+	term.c_lflag &= ~(ICANON);
+	term.c_lflag &= ~(ECHO);
+	tcsetattr(0, TCSADRAIN, &term);
 	init_opt(&opt);
 	i = -1;
 	list_a = NULL;
@@ -134,5 +156,6 @@ int				main(int argc, const char *argv[])
 	ft_get_directive(&list_a, &list_b, &opt);
 	(list_a != NULL) ? clear_list(&list_a) : 0;
 	(list_b != NULL) ? clear_list(&list_b) : 0;
+	term.c_lflag = (ICANON | ECHO);
 	return (0);
 }
