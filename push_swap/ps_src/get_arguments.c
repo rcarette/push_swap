@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 12:12:38 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/03 22:45:50 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/05 07:05:28 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static int		check_data(const char *str)
 {
-	int		ite;
+	int			ite;
+	long long	data;
 
 	ite = -1;
 	ite += (str[0] == '-') ? 1 : 0;
@@ -22,6 +23,9 @@ static int		check_data(const char *str)
 	while (str[++ite])
 		if (!(ft_isdigit(str[ite])))
 			return (0);
+	data = ft_atoi(str);
+	if (data < MIN_INT || data > MAX_INT)
+		return (0);
 	return (1);
 }
 
@@ -67,12 +71,16 @@ static int		split_spaces(char *str, t_push **list)
 static int		ft_getoption(char *str, t_opt *opt)
 {
 	int		ite;
+	int		number;
 
+	number = 0;
 	ite = 0;
 	while (str[++ite])
 	{
 		if (str[ite] == 'd')
 			opt->descending = 1;
+		else if (str[ite] == 'l')
+			opt->last_instruction = 1;
 		else if (str[ite] == 't')
 			opt->time = 1;
 		else if (str[ite] == 'v')
@@ -85,13 +93,13 @@ static int		ft_getoption(char *str, t_opt *opt)
 	return (1);
 }
 
+
 int				get_arguments(const char **av, t_push **list, t_opt *opt)
 {
 	int				ite;
 	long long		data;
 
 	ite = 0;
-	(void)opt;
 	while (av[++ite])
 	{
 		if ((av[ite][0] == '-' || av[ite][0] == '+') && ft_strlen(av[ite]) == 1)

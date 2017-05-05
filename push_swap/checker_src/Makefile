@@ -6,12 +6,12 @@
 #    By: rcarette <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/26 12:16:43 by rcarette          #+#    #+#              #
-#    Updated: 2017/05/05 01:24:50 by rcarette         ###   ########.fr        #
+#    Updated: 2017/05/05 07:00:15 by rcarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = checker
-FLAGS =  -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -g -Wall -Wextra -Werror
 CC = clang $(FLAGS)
 INC = ../inc/
 LIBFT = ../libft/
@@ -27,6 +27,7 @@ SRCS = checker.c\
 	   is_sorted.c\
 	   ../tools/init_opt.c\
 	   ../tools/ft_usage.c\
+	   ../tools/visualization.c\
 
 OBJS = $(SRCS:%.c=%.o)
 
@@ -35,10 +36,10 @@ OBJS = $(SRCS:%.c=%.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) -ltermcap -o $(NAME) $(SRCS) $(ALL_INC) -L $(LIBFT) -lft
+	$(CC) -o $(NAME) $(SRCS) $(ALL_INC) -L $(LIBFT) -lft
 
 %.o: %.c
-	$(CC) -ltermcap -o $@ -c $< $(ALL_INC)
+	$(CC) -o $@ -c $< $(ALL_INC)
 
 clean:
 	@make clean -C $(LIBFT)

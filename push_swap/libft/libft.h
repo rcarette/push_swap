@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/13 02:51:56 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/03 10:53:43 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/05 03:01:18 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,4 +113,5 @@ int					is_sorted_array(int *board, int size);
 void				print_array(int *board, int size);
 int					is_sorted_ascending_array(int *board, int size);
 int					is_sorted_descending_array(int *board, int size);
+int					getintsize(int data);
 #endif

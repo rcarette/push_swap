@@ -6,15 +6,13 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 11:46:18 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/05 01:15:20 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/05 09:42:53 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include "../libft/libft.h"
-# include <termios.h>
-# include <term.h>
 # define DEFAULT "\033[0;0m"
 # define RED "\033[31;1m"
 # define GREEN "\033[32;1m"
@@ -25,8 +23,19 @@ typedef struct		s_opt
 	char			instruc;
 	char			time;
 	char			visualization;
+	char			time_opt;
+	char			last_instruction;
 
 }					t_opt;
+
+typedef struct		s_rotate
+{
+	int				rotate_top;
+	int				rotate_bottom;
+	int				double_rotate;
+	int				conduct;
+
+}					t_rotate;
 
 
 int					get_arguments(const char **av, t_push **list, t_opt *opt);
@@ -73,4 +82,5 @@ t_push		*dupliq(t_push *list);
 void		init_opt(t_opt *opt);
 void		ft_usage(t_push **list_a);
 void		check_option(t_opt *opt);
+void		visualization(t_push *list_a, t_push *list_b, t_opt *opt);
 #endif

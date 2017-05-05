@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 20:48:51 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/05 00:49:24 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/05 09:54:43 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void			init_rotate(t_push **list)
 	}
 }
 
-void			transfer_pile(t_push **list_a, t_push **list_b)
+/*void			transfer_pile(t_push **list_a, t_push **list_b)
 {
 	int			data;
 	t_push		*new_link;
@@ -92,13 +92,93 @@ int			check_aftermedian(t_push *list, int median)
 		list = list->next;
 	}
 	return (1);
+}*/
+
+void			prepare_sort(t_push **list_a, t_push **list_b)
+{
+	int		i;
+
+	i = 10;
+	while (i--)
+		push(list_a, list_b, 0);
+	if ((*list_b)->value < (*list_b)->next->value)
+		swap_pile(list_b);
+}
+
+int				ft_getposition(t_push *list_b, int value)
+{
+	int		position;
+
+	position = 1;
+	while (list_b->next)
+	{
+		if ((value < list_b->value && value > list_b->next->value) ||
+				(value > list_b->next->value && list_b->value < list_b->next->value) ||
+				(value < list_b->value && list_b->value < list_b->next->value))
+			return (position);
+		++position;
+		list_b = list_b->next;
+	}
+	return (0);
+}
+
+t_push			*ft_getdata(t_push *list_b, int position)
+{
+	int		ite;
+
+	ite = 0;
+	while (list_b)
+	{
+		if (position == ite)
+			return (list_b);
+		ite++;
+		list_b = list_b->next;
+	}
+	return (NULL);
+}
+
+void			select_rotate(t_push *list_a, t_push *list_b)
+{
+	int			position;
+	t_push		*list;
+
+
+	while (list_a)
+	{
+
+		position = ft_getposition(list_b, list_a->value);
+		if (position > (lenght_list(list_b) / 2 + lenght_list(list_b) % 2))
+				printf("Passage");
+		else
+		{
+			printf("%d\n", position);
+			
+		}
+		list = ft_getdata(list_b, position);
+		list_a = list_a->next;
+	}
 }
 
 
 void			ft_resolve_ascending(t_push **list_a, t_push **list_b, \
 																int choice)
 {
-	int		median;
+	(void)choice;
+	prepare_sort(list_a, list_b);
+
+	/*while (lenght_list(*list_a) > 0)
+	{
+
+	}*/
+	select_rotate(*list_a, *list_b);
+	print_list(*list_b);
+	/*while (lenght_list(*list_a) != 0)
+	{
+		init_rotate(list_a);
+		init_rotate(list_b);
+
+	}*/
+	/*int		median;
 	int		last;
 	int		size;
 
@@ -133,5 +213,5 @@ void			ft_resolve_ascending(t_push **list_a, t_push **list_b, \
 			break ;
 	}
 	transfer_pile(list_a, list_b);
-	//print_list(*list_a);
+	//print_list(*list_a);*/
 }

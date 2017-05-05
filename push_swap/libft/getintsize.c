@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_opt.c                                         :+:      :+:    :+:   */
+/*   getintsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/03 11:22:25 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/05 03:42:56 by rcarette         ###   ########.fr       */
+/*   Created: 2017/05/05 03:01:34 by rcarette          #+#    #+#             */
+/*   Updated: 2017/05/05 03:04:10 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "libft.h"
 
-void			init_opt(t_opt *opt)
+int		getintsize(int data)
 {
-	opt->descending = 0;
-	opt->instruc = 0;
-	opt->time = 0;
-	opt->visualization = 0;
-	opt->time_opt = 1;
+	char	*str;
+	int		size;
+
+	str = ft_itoa(data);
+	size = ft_strlen(str);
+	free(str);
+	return (size);
 }
