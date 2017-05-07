@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 20:48:51 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/07 08:03:36 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/07 09:16:29 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,6 +207,7 @@ void			select_bestshot(t_push *list_a, t_push *list_b, \
 	}
 	if (best_shot->status == 1)
 		calcul_double_rotation(&best_shot);
+	//printf("Minimun : %d rotate_a: %d rotate_b : %d double : %d\n", min, best_shot->rotate_a, best_shot->rotate_b, best_shot->double_rotate);
 }
 
 
