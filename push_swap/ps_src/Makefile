@@ -6,7 +6,7 @@
 #    By: rcarette <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/26 12:04:47 by rcarette          #+#    #+#              #
-#    Updated: 2017/05/04 20:49:56 by rcarette         ###   ########.fr        #
+#    Updated: 2017/05/06 21:07:31 by rcarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ TOOLS = ../tools/ft_getsmall_position.c\
 		../tools/ft_getlast_elem.c\
 		../tools/init_opt.c\
 		../tools/ft_usage.c\
+		../tools/init_select_rotate.c\
 
 OBJS = $(SRCS:%.c=%.o)
 

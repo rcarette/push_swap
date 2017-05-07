@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 11:37:24 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/05 07:13:04 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/07 04:59:50 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ static void		ft_exit_checker(t_push **list_a, t_push **list_b)
 
 static void		messag(char *str, int choice, long long nbr_coup, t_opt *opt)
 {
-	write(1, "\n", 1);
-	write(1, "\n", 1);
 	if (opt->instruc)
 	{
 		write(1, "Intruction(s) : (", 18);

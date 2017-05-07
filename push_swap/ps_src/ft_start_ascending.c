@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 14:31:52 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/05 00:09:52 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/07 04:38:35 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,15 +104,11 @@ void			ft_five_elements_ascending(t_push **list_a, t_push **list_b)
 
 void			ft_start_ascending(t_push **list_a, t_push **list_b)
 {
-	int		choice;
 
 	if (lenght_list(*list_a) == 3 || lenght_list(*list_a) == 2)
 		ft_tree_elements_ascending(list_a, list_b);
 	else if (lenght_list(*list_a) == 4 || lenght_list(*list_a) == 5)
 		ft_five_elements_ascending(list_a, list_b);
 	else
-	{
-		choice = (lenght_list(*list_a) > 150) ? 2 : 1;
-		ft_resolve_ascending(list_a, list_b, choice);
-	}
+		ft_resolve_ascending(list_a, list_b);
 }

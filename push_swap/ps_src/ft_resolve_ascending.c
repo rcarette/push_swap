@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 20:48:51 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/05 09:54:43 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/07 08:03:36 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,78 +31,22 @@ void			init_rotate(t_push **list)
 	}
 }
 
-/*void			transfer_pile(t_push **list_a, t_push **list_b)
-{
-	int			data;
-	t_push		*new_link;
-
-	if (!(is_sorted_desc(*list_b)))
-	{
-		while (lenght_list(*list_b) > 0)
-		{
-			push(list_a, list_b, 1);
-			write(1, "pa\n", 3);
-		}
-		return ;
-	}
-	while (lenght_list(*list_b) > 0)
-	{
-		init_rotate(list_b);
-		data = ft_getbig_value(*list_b);
-		new_link = ft_getdata_position(*list_b, data);
-		if (new_link->rotate_top < new_link->rotate_bottom)
-		{
-			while (new_link->rotate_top--)
-			{
-				ft_rotate(list_a, list_b, 1);
-				write(1, "rb\n", 3);
-			}
-			push(list_a, list_b, 1);
-			write(1, "pa\n", 3);
-		}
-		else
-		{
-			while (new_link->rotate_bottom--)
-			{
-				ft_reverse_rotate(list_a, list_b, 1);
-				write(1, "rrb\n", 4);
-			}
-			push(list_a, list_b, 1);
-			write(1, "pa\n", 3);
-		}
-	}
-}
-
-static int		ft_getdata(int *median, int *size, t_push **list_a, int choice)
-{
-	int		last;
-
-	*median = ft_get_mediane(*list_a, choice);
-	*size = lenght_list(*list_a);
-	last = ft_getlast_elem(*list_a);
-	return (last);
-}
-
-int			check_aftermedian(t_push *list, int median)
-{
-	while (list)
-	{
-		if (list->value > median)
-			return (0);
-		list = list->next;
-	}
-	return (1);
-}*/
-
 void			prepare_sort(t_push **list_a, t_push **list_b)
 {
 	int		i;
 
-	i = 10;
-	while (i--)
+	i = 2;
+	while (i)
+	{
 		push(list_a, list_b, 0);
+		write(1, "pb\n", 3);
+		i--;
+	}
 	if ((*list_b)->value < (*list_b)->next->value)
+	{
 		swap_pile(list_b);
+		write(1, "sb\n", 3);
+	}
 }
 
 int				ft_getposition(t_push *list_b, int value)
@@ -112,8 +56,9 @@ int				ft_getposition(t_push *list_b, int value)
 	position = 1;
 	while (list_b->next)
 	{
-		if ((value < list_b->value && value > list_b->next->value) ||
-				(value > list_b->next->value && list_b->value < list_b->next->value) ||
+		if ((value < list_b->value && value > list_b->next->value) || \
+										(value > list_b->next->value && \
+									list_b->value < list_b->next->value) || \
 				(value < list_b->value && list_b->value < list_b->next->value))
 			return (position);
 		++position;
@@ -137,81 +82,214 @@ t_push			*ft_getdata(t_push *list_b, int position)
 	return (NULL);
 }
 
-void			select_rotate(t_push *list_a, t_push *list_b)
+void			check_top(t_push *rot_a, t_push *rot_b, int *min, \
+														t_rotate **best_shot)
 {
-	int			position;
-	t_push		*list;
+	int		totals;
 
-
-	while (list_a)
+	totals = *min;
+	if (rot_a->rotate_top > rot_b->rotate_top)
+		totals = rot_a->rotate_top;
+	else if (rot_b->rotate_top > rot_a->rotate_top)
+		totals = rot_b->rotate_top;
+	else if (rot_a->rotate_top == rot_b->rotate_top)
+		totals = rot_b->rotate_top;
+	if (totals < *min)
 	{
+		*min = totals;
+		(*best_shot)->rotate_a = rot_a->rotate_top;
+		(*best_shot)->rotate_b = rot_b->rotate_top;
+		(*best_shot)->value_a = rot_a->value;
+		(*best_shot)->value_b = rot_b->value;
+		if (rot_a->rotate_top != 0 && rot_b->rotate_top != 0)
+			(*best_shot)->status = (1);
+	}
+}
 
-		position = ft_getposition(list_b, list_a->value);
-		if (position > (lenght_list(list_b) / 2 + lenght_list(list_b) % 2))
-				printf("Passage");
-		else
-		{
-			printf("%d\n", position);
-			
-		}
-		list = ft_getdata(list_b, position);
-		list_a = list_a->next;
+void			check_bottom(t_push *rot_a, t_push *rot_b, int *min, \
+														t_rotate **best_shot)
+{
+	int		totals;
+
+	totals = *min;
+	if (rot_a->rotate_bottom > rot_b->rotate_bottom)
+		totals = rot_a->rotate_bottom;
+	else if (rot_b->rotate_bottom > rot_a->rotate_bottom)
+		totals = rot_b->rotate_bottom;
+	else if (rot_b->rotate_bottom == rot_a->rotate_bottom)
+		totals = rot_a->rotate_bottom;
+	if (totals <= *min)
+	{
+		*min = totals;
+		(*best_shot)->rotate_a = (-rot_a->rotate_bottom);
+		(*best_shot)->rotate_b = (-rot_b->rotate_bottom);
+		(*best_shot)->value_a = rot_a->value;
+		(*best_shot)->value_b = rot_b->value;
+		if (rot_a->rotate_bottom != 0 && rot_b->rotate_bottom != 0)
+			(*best_shot)->status = (1);
+	}
+}
+
+void			check_rotate(t_push *rot_a, t_push *rot_b, int *min, \
+														t_rotate **best_shot)
+{
+	int		totals;
+
+	totals = (rot_a->rotate_top + rot_b->rotate_bottom);
+	if (totals <= *min)
+	{
+		(*best_shot)->rotate_a = rot_a->rotate_top;
+		(*best_shot)->rotate_b = (-rot_b->rotate_bottom);
+		(*best_shot)->value_a = rot_a->value;
+		(*best_shot)->value_b = rot_b->value;
+		*min = totals;
+		(*best_shot)->status = 0;
+	}
+}
+
+void			check_reverse_rotate(t_push *rot_a, t_push *rot_b, int *min, \
+														t_rotate **best_shot)
+{
+	int		totals;
+
+	totals = (rot_a->rotate_bottom + rot_b->rotate_top);
+	if (totals <= *min)
+	{
+		(*best_shot)->rotate_a = (-rot_a->rotate_bottom);
+		(*best_shot)->rotate_b = rot_b->rotate_top;
+		(*best_shot)->value_a = rot_a->value;
+		(*best_shot)->value_b = rot_b->value;
+		*min = totals;
+		(*best_shot)->status = 0;
+	}
+}
+
+void				calcul_double_rotation(t_rotate **best_shot)
+{
+	if ((*best_shot)->rotate_a == (*best_shot)->rotate_b)
+	{
+		(*best_shot)->double_rotate = (*best_shot)->rotate_a;
+		(*best_shot)->rotate_a = 0;
+		(*best_shot)->rotate_b = 0;
+	}
+	else if ((*best_shot)->rotate_a > (*best_shot)->rotate_b)
+	{
+		(*best_shot)->double_rotate = (*best_shot)->rotate_b;
+		(*best_shot)->rotate_a -= (*best_shot)->rotate_b;
+		(*best_shot)->rotate_b = 0;
+	}
+	else if ((*best_shot)->rotate_b > (*best_shot)->rotate_a)
+	{
+		(*best_shot)->double_rotate = (*best_shot)->rotate_a;
+		(*best_shot)->rotate_b -= (*best_shot)->rotate_a;
+		(*best_shot)->rotate_a = 0;
 	}
 }
 
 
-void			ft_resolve_ascending(t_push **list_a, t_push **list_b, \
-																int choice)
+void			select_bestshot(t_push *list_a, t_push *list_b, \
+														t_rotate *best_shot)
 {
-	(void)choice;
-	prepare_sort(list_a, list_b);
+	int			position_b;
+	t_push		*rot_b;
+	int			min;
 
-	/*while (lenght_list(*list_a) > 0)
+	min = 2147483647;
+	while (list_a)
 	{
-
-	}*/
-	select_rotate(*list_a, *list_b);
-	print_list(*list_b);
-	/*while (lenght_list(*list_a) != 0)
-	{
-		init_rotate(list_a);
-		init_rotate(list_b);
-
-	}*/
-	/*int		median;
-	int		last;
-	int		size;
-
-	while (1)
-	{
-		last = ft_getdata(&median, &size, list_a, choice);
-		while ((*list_a)->value != last)
-		{
-			if (check_aftermedian(*list_a, median))
-				break ;
-			if ((*list_a)->value <= median)
-			{
-				push(list_a, list_b, 0);
-				write(1, "pb\n", 3);
-			}
-			else if ((*list_a)->value > median)
-			{
-				ft_rotate(list_a, list_b, 0);
-				write(1, "ra\n", 3);
-			}
-		}
-		if ((*list_a)->value == last && (*list_a)->value < median)
-		{
-			push(list_a, list_b, 0);
-			write(1, "pb\n", 3);
-		}
-		if (lenght_list(*list_a) == 5)
-			ft_five_elements_ascending(list_a, list_b);
-		if (lenght_list(*list_a) == 3 || lenght_list(*list_a) == 2)
-			ft_tree_elements_ascending(list_a, list_b);
-		if (!(is_sorted(*list_a)))
-			break ;
+		position_b = ft_getposition(list_b, list_a->value);
+		rot_b = ft_getdata(list_b, position_b);
+		check_top(list_a, rot_b, &min, &best_shot);
+		check_bottom(list_a, rot_b, &min, &best_shot);
+		check_rotate(list_a, rot_b, &min, &best_shot);
+		check_reverse_rotate(list_a, rot_b, &min, &best_shot);
+		list_a = list_a->next;
 	}
-	transfer_pile(list_a, list_b);
-	//print_list(*list_a);*/
+	if (best_shot->status == 1)
+		calcul_double_rotation(&best_shot);
+}
+
+
+void			ft_resolve_ascending(t_push **list_a, t_push **list_b)
+{
+	t_rotate	best_shot;
+
+	prepare_sort(list_a, list_b); //DEBUT D'ALGO !
+	while (lenght_list(*list_a) != 0)
+	{
+		// PROGRAM PRINCIPALE
+		init_rotate(list_b);
+		init_rotate(list_a);
+		init_select_rotate(&best_shot);
+		select_bestshot(*list_a, *list_b, &best_shot);
+		if (best_shot.double_rotate != 0)
+		{
+			if (best_shot.double_rotate < 0)
+			{
+				best_shot.double_rotate = (-best_shot.double_rotate);
+				while (best_shot.double_rotate)
+				{
+					ft_reverse_rotate_rrr(list_a, list_b);
+					write(1, "rrr\n", 4);
+					best_shot.double_rotate--;
+				}
+			}
+			else
+			{
+				while (best_shot.double_rotate)
+				{
+					ft_rotate_rr(list_a, list_b);
+					write(1, "rr\n", 3);
+					best_shot.double_rotate--;
+				}
+			}
+		}
+		if (best_shot.rotate_b < 0 || best_shot.rotate_b > 0)
+		{
+			if (best_shot.rotate_b < 0)
+			{
+				best_shot.rotate_b = (-best_shot.rotate_b);
+				while (best_shot.rotate_b > 0)
+				{
+					ft_reverse_rotate(list_a, list_b, 1);
+					write(1, "rrb\n", 4);
+					best_shot.rotate_b--;
+				}
+			}
+			else
+			{
+				while (best_shot.rotate_b > 0)
+				{
+					ft_rotate(list_a, list_b, 1);
+					write(1, "rb\n", 3);
+					best_shot.rotate_b--;
+				}
+			}
+		}
+		if (best_shot.rotate_a < 0 || best_shot.rotate_a > 0)
+		{
+			if (best_shot.rotate_a < 0)
+			{
+				best_shot.rotate_a = (-best_shot.rotate_a);
+				while (best_shot.rotate_a > 0)
+				{
+					ft_reverse_rotate(list_a, list_b, 0);
+					write(1, "rra\n", 4);
+					best_shot.rotate_a--;
+				}
+			}
+			else
+			{
+				while (best_shot.rotate_a > 0)
+				{
+					ft_rotate(list_a, list_b, 0);
+					write(1, "ra\n", 3);
+					best_shot.rotate_a--;
+				}
+			}
+		}
+		push(list_a, list_b, 0);
+		write(1, "pb\n", 3);
+	}
+	// END ALGO !
 }

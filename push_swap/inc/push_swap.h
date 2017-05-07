@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 11:46:18 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/05 09:42:53 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/07 04:38:18 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ typedef struct		s_opt
 
 typedef struct		s_rotate
 {
-	int				rotate_top;
-	int				rotate_bottom;
+	int				rotate_a;
+	int				rotate_b;
 	int				double_rotate;
-	int				conduct;
+	int				value_a;
+	int				value_b;
+	int				status;
 
 }					t_rotate;
 
@@ -49,8 +51,7 @@ t_push				*ft_getdata_position(t_push *list, int data);
 
 void				ft_start_ascending(t_push **list_a, t_push **list_b);
 void				ft_start_descending(t_push **list_a, t_push **list_b);
-void				ft_resolve_ascending(t_push **list_a, t_push **list_b, \
-																	int choice);
+void				ft_resolve_ascending(t_push **list_a, t_push **list_b);
 void				ft_tree_elements_ascending(t_push **list_a, \
 															t_push **list_b);
 void				ft_five_elements_ascending(t_push **list_a, t_push **list_b);
@@ -83,4 +84,5 @@ void		init_opt(t_opt *opt);
 void		ft_usage(t_push **list_a);
 void		check_option(t_opt *opt);
 void		visualization(t_push *list_a, t_push *list_b, t_opt *opt);
+void		init_select_rotate(t_rotate *rotate);
 #endif
