@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 18:47:50 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/08 12:23:18 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/08 17:36:08 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void		ft_reverse_rotate_a(t_push **list_a)
 	int			data;
 
 	temporary = *list_a;
-	if (!*list_a)
+	if (lenght_list(*list_a) <= 1)
 		return ;
 	while (temporary->next)
 		temporary = temporary->next;
@@ -33,7 +33,7 @@ static void		ft_reverse_rotate_b(t_push **list_b)
 	int			data;
 
 	temporary = *list_b;
-	if (!*list_b)
+	if (lenght_list(*list_b) <= 1)
 		return ;
 	while (temporary->next)
 		temporary = temporary->next;
@@ -44,8 +44,10 @@ static void		ft_reverse_rotate_b(t_push **list_b)
 
 void			ft_reverse_rotate_rrr(t_push **list_a, t_push **list_b)
 {
-	ft_reverse_rotate_a(list_a);
-	ft_reverse_rotate_b(list_b);
+	if (lenght_list(*list_a) > 1)
+		ft_reverse_rotate_a(list_a);
+	if (lenght_list(*list_b) > 1)
+		ft_reverse_rotate_b(list_b);
 }
 
 void			ft_reverse_rotate(t_push **list_a, t_push **list_b, int choice)

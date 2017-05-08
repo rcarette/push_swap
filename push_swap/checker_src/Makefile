@@ -6,12 +6,12 @@
 #    By: rcarette <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/26 12:16:43 by rcarette          #+#    #+#              #
-#    Updated: 2017/05/08 17:03:24 by rcarette         ###   ########.fr        #
+#    Updated: 2017/05/08 17:51:18 by rcarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = checker
-FLAGS = -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -Wall -Wextra -Werror
 CC = clang $(FLAGS)
 INC = ../inc/
 LIBFT = ../libft/

@@ -6,12 +6,12 @@
 #    By: rcarette <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/26 12:04:47 by rcarette          #+#    #+#              #
-#    Updated: 2017/05/08 17:03:37 by rcarette         ###   ########.fr        #
+#    Updated: 2017/05/08 17:50:45 by rcarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
-FLAGS = -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -Wall -Wextra -Werror
 CC = clang $(FLAGS)
 INC = ../../include
 LIBFT = ../libft/
