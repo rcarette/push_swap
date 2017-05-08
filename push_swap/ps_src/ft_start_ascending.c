@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 14:31:52 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/07 04:38:35 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/07 23:44:45 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void		ft_pos_max_asen(t_push **list_a, t_push **list_b, int pos_max)
 	}
 }
 
-void			ft_tree_elements_ascending(t_push **list_a, t_push **list_b)
+static void		ft_tree_elements_ascending(t_push **list_a, t_push **list_b)
 {
 	int		max_value;
 	int		*board;
@@ -58,7 +58,7 @@ void			ft_tree_elements_ascending(t_push **list_a, t_push **list_b)
 	free(board);
 }
 
-void			stock_two_small_value(t_push **list_a, t_push **list_b)
+static void		stock_two_small_value(t_push **list_a, t_push **list_b)
 {
 	int		min_value;
 	int		pos;
@@ -87,7 +87,7 @@ void			stock_two_small_value(t_push **list_a, t_push **list_b)
 	write(1, "pb\n", 3);
 }
 
-void			ft_five_elements_ascending(t_push **list_a, t_push **list_b)
+static void		ft_five_elements_ascending(t_push **list_a, t_push **list_b)
 {
 	int		i;
 

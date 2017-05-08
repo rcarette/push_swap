@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/13 02:51:56 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/05 03:01:18 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/07 17:33:04 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # define BUFF_SIZE 86
 # define MAX_INT 2147483647
 # define MIN_INT -2147483648
+# define ABS(x) (((x) < 0) ? -(x) : (x))
+
 
 typedef struct		s_push
 {

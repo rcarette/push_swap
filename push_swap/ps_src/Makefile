@@ -6,12 +6,12 @@
 #    By: rcarette <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/26 12:04:47 by rcarette          #+#    #+#              #
-#    Updated: 2017/05/07 08:12:42 by rcarette         ###   ########.fr        #
+#    Updated: 2017/05/07 23:57:53 by rcarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
-FLAGS = -g -Wall -Wextra -Werror
+FLAGS = -g -Wall -Wextra -Werror -fsanitize=address
 CC = clang $(FLAGS)
 INC = ../../include
 LIBFT = ../libft/
@@ -24,15 +24,10 @@ SRCS = push_swap.c\
 	   ../instruction/ft_rotate.c\
 	   ../instruction/push.c\
 	   ../instruction/swap_pile.c\
-	   ../checker_src/is_sorted.c\
 	   ../ps_src/ft_start_ascending.c\
 	   ../ps_src/ft_resolve_ascending.c\
-	   ../ps_src/ft_start_descending.c\
 
-TOOLS = ../tools/ft_getsmall_position.c\
-		../tools/ft_getsmall_value.c\
-		../tools/ft_getdata_position.c\
-		../tools/init_opt.c\
+TOOLS = ../tools/init_opt.c\
 		../tools/ft_usage.c\
 		../tools/init_select_rotate.c\
 

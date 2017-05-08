@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 20:48:51 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/07 09:16:29 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/08 00:00:56 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,13 @@ void			init_rotate(t_push **list)
 
 void			prepare_sort(t_push **list_a, t_push **list_b)
 {
-	int		i;
+	char	i;
 
 	i = 2;
-	while (i)
+	while (i--)
 	{
 		push(list_a, list_b, 0);
 		write(1, "pb\n", 3);
-		i--;
-	}
-	if ((*list_b)->value < (*list_b)->next->value)
-	{
-		swap_pile(list_b);
-		write(1, "sb\n", 3);
 	}
 }
 
@@ -90,9 +84,7 @@ void			check_top(t_push *rot_a, t_push *rot_b, int *min, \
 	totals = *min;
 	if (rot_a->rotate_top > rot_b->rotate_top)
 		totals = rot_a->rotate_top;
-	else if (rot_b->rotate_top > rot_a->rotate_top)
-		totals = rot_b->rotate_top;
-	else if (rot_a->rotate_top == rot_b->rotate_top)
+	else
 		totals = rot_b->rotate_top;
 	if (totals < *min)
 	{
@@ -114,11 +106,9 @@ void			check_bottom(t_push *rot_a, t_push *rot_b, int *min, \
 	totals = *min;
 	if (rot_a->rotate_bottom > rot_b->rotate_bottom)
 		totals = rot_a->rotate_bottom;
-	else if (rot_b->rotate_bottom > rot_a->rotate_bottom)
+	else
 		totals = rot_b->rotate_bottom;
-	else if (rot_b->rotate_bottom == rot_a->rotate_bottom)
-		totals = rot_a->rotate_bottom;
-	if (totals <= *min)
+	if (totals < *min)
 	{
 		*min = totals;
 		(*best_shot)->rotate_a = (-rot_a->rotate_bottom);
@@ -136,7 +126,7 @@ void			check_rotate(t_push *rot_a, t_push *rot_b, int *min, \
 	int		totals;
 
 	totals = (rot_a->rotate_top + rot_b->rotate_bottom);
-	if (totals <= *min)
+	if (totals < *min)
 	{
 		(*best_shot)->rotate_a = rot_a->rotate_top;
 		(*best_shot)->rotate_b = (-rot_b->rotate_bottom);
@@ -153,7 +143,7 @@ void			check_reverse_rotate(t_push *rot_a, t_push *rot_b, int *min, \
 	int		totals;
 
 	totals = (rot_a->rotate_bottom + rot_b->rotate_top);
-	if (totals <= *min)
+	if (totals < *min)
 	{
 		(*best_shot)->rotate_a = (-rot_a->rotate_bottom);
 		(*best_shot)->rotate_b = rot_b->rotate_top;
@@ -172,13 +162,13 @@ void				calcul_double_rotation(t_rotate **best_shot)
 		(*best_shot)->rotate_a = 0;
 		(*best_shot)->rotate_b = 0;
 	}
-	else if ((*best_shot)->rotate_a > (*best_shot)->rotate_b)
+	else if (ABS((*best_shot)->rotate_a) > ABS((*best_shot)->rotate_b))
 	{
 		(*best_shot)->double_rotate = (*best_shot)->rotate_b;
 		(*best_shot)->rotate_a -= (*best_shot)->rotate_b;
 		(*best_shot)->rotate_b = 0;
 	}
-	else if ((*best_shot)->rotate_b > (*best_shot)->rotate_a)
+	else if (ABS((*best_shot)->rotate_b) > ABS((*best_shot)->rotate_a))
 	{
 		(*best_shot)->double_rotate = (*best_shot)->rotate_a;
 		(*best_shot)->rotate_b -= (*best_shot)->rotate_a;
@@ -194,7 +184,7 @@ void			select_bestshot(t_push *list_a, t_push *list_b, \
 	t_push		*rot_b;
 	int			min;
 
-	min = 2147483647;
+	min = MAX_INT;
 	while (list_a)
 	{
 		position_b = ft_getposition(list_b, list_a->value);
@@ -207,7 +197,6 @@ void			select_bestshot(t_push *list_a, t_push *list_b, \
 	}
 	if (best_shot->status == 1)
 		calcul_double_rotation(&best_shot);
-	//printf("Minimun : %d rotate_a: %d rotate_b : %d double : %d\n", min, best_shot->rotate_a, best_shot->rotate_b, best_shot->double_rotate);
 }
 
 

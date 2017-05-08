@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 11:46:18 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/07 08:12:19 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/07 23:58:20 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct		s_opt
 	char			instruc;
 	char			time;
 	char			visualization;
-	char			time_opt;
+	int				time_opt;
 	char			last_instruction;
 
 }					t_opt;
@@ -42,17 +42,8 @@ typedef struct		s_rotate
 
 int					get_arguments(const char **av, t_push **list, t_opt *opt);
 void				ft_exit(t_push **push);
-int					is_sorted(t_push *list_a);
-int					is_sorted_desc(t_push *list);
-int					ft_getbig_value(t_push *list);
-t_push				*ft_getdata_position(t_push *list, int data);
-
 void				ft_start_ascending(t_push **list_a, t_push **list_b);
-void				ft_start_descending(t_push **list_a, t_push **list_b);
 void				ft_resolve_ascending(t_push **list_a, t_push **list_b);
-void				ft_tree_elements_ascending(t_push **list_a, \
-															t_push **list_b);
-void				ft_five_elements_ascending(t_push **list_a, t_push **list_b);
 /*
  * INSTRUCTION
  */
@@ -74,10 +65,6 @@ void			ft_reverse_rotate_rrr(t_push **list_a, t_push **list_b);
 /*
  * TOOLS
  */
-int			ft_getsmall_position(t_push *list_a);
-int			ft_getsmall_value(t_push *list);
-int			ft_getbig_position(t_push *list_a);
-t_push		*dupliq(t_push *list);
 void		init_opt(t_opt *opt);
 void		ft_usage(t_push **list_a);
 void		check_option(t_opt *opt);

@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 11:37:24 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/07 09:00:58 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/07 21:31:31 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void		messag(char *str, int choice, long long nbr_coup, t_opt *opt)
 {
 	if (opt->instruc)
 	{
-		write(1, "Intruction(s) : (", 18);
+		write(1, "Number of shots : (", 19);
 		ft_putnbr(nbr_coup);
 		write(1, ") >> ", 5);
 	}
@@ -36,7 +36,6 @@ static void		messag(char *str, int choice, long long nbr_coup, t_opt *opt)
 	(choice == 0) ? write(1, str, ft_strlen(str)) : 0;
 	(choice == 0) ? write(1, "KO\n", 3) : 0;
 	write(1, DEFAULT, ft_strlen(DEFAULT));
-	write(1, "\n", 1);
 }
 
 int				ft_check_directive(char *directive)
@@ -60,10 +59,10 @@ int				ft_check_directive(char *directive)
 void			display_last_directive(const char *directive)
 {
 	write(1, "\033[33;1m", ft_strlen("\033[33;1m"));
-	write(1, "\nLast directive : ", 18);
+	write(1, "Last directive : ", 17);
+	write(1, "\033[0;0m", ft_strlen("\033[0;0m"));
+	write(1, "\033[31;1m", ft_strlen("\033[31;1m"));
 	write(1, directive, ft_strlen(directive));
-	write(1, "\n", 1);
-	write(1, "\n", 1);
 	write(1, "\033[0;0m", ft_strlen("\033[0;0m"));
 }
 
@@ -94,7 +93,7 @@ static void		ft_start_directive(const char *directive, t_push **list_a,\
 	system("clear");
 	(opt->last_instruction) ? display_last_directive(directive) : 0;
 	(opt->visualization == 1) ? visualization(*list_a, *list_b, opt) : 0;
-	(opt->time) ? sleep(opt->time_opt) : 0;
+	(opt->time) ? usleep(opt->time_opt) : 0;
 }
 
 void			check_if_sorted(t_push **list_a, t_opt *opt, int i_coups, \
@@ -138,6 +137,7 @@ static void		ft_get_directive(t_push **list_a, t_push **list_b, t_opt *opt)
 		++i_coups;
 		write(1, "\n", 1);
 	}
+	(directive != NULL) ? free(directive) : 0;
 	check_if_sorted(list_a, opt, i_coups, *list_b);
 }
 

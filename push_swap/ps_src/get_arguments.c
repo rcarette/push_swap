@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 12:12:38 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/05 07:05:28 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/07 15:49:57 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,31 +68,32 @@ static int		split_spaces(char *str, t_push **list)
 	return (1);
 }
 
-static int		ft_getoption(char *str, t_opt *opt)
+static int		ft_getoption(char *s1, t_opt *opt)
 {
-	int		ite;
-	int		number;
+	int		i;
 
-	number = 0;
-	ite = 0;
-	while (str[++ite])
+	i = 0;
+	while (s1[++i])
 	{
-		if (str[ite] == 'd')
+		if (s1[i] == 'd')
 			opt->descending = 1;
-		else if (str[ite] == 'l')
+		else if (s1[i] == 'l')
 			opt->last_instruction = 1;
-		else if (str[ite] == 't')
+		else if (s1[i] == 't')
+		{
 			opt->time = 1;
-		else if (str[ite] == 'v')
+			(ft_isdigit(s1[i + 1])) ? opt->time_opt = ft_atoi(&s1[i + 1]) : 0;
+			i += (ft_isdigit(s1[i + 1])) ? getintsize(opt->time_opt) : 0;
+		}
+		else if (s1[i] == 'v')
 			opt->visualization = 1;
-		else if (str[ite] == 'i')
+		else if (s1[i] == 'i')
 			opt->instruc = 1;
 		else
 			return (-1);
 	}
 	return (1);
 }
-
 
 int				get_arguments(const char **av, t_push **list, t_opt *opt)
 {

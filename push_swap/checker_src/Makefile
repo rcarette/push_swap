@@ -6,12 +6,12 @@
 #    By: rcarette <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/26 12:16:43 by rcarette          #+#    #+#              #
-#    Updated: 2017/05/05 07:00:15 by rcarette         ###   ########.fr        #
+#    Updated: 2017/05/07 23:46:51 by rcarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = checker
-FLAGS = -g -Wall -Wextra -Werror
+FLAGS = -g -Wall -Wextra -Werror -fsanitize=address
 CC = clang $(FLAGS)
 INC = ../inc/
 LIBFT = ../libft/
@@ -24,7 +24,6 @@ SRCS = checker.c\
 	   ../instruction/ft_rotate.c\
 	   ../instruction/push.c\
 	   ../instruction/swap_pile.c\
-	   is_sorted.c\
 	   ../tools/init_opt.c\
 	   ../tools/ft_usage.c\
 	   ../tools/visualization.c\
