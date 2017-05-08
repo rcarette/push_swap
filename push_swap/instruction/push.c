@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 16:05:26 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/04 21:03:39 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/08 12:23:45 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void		push_a(t_push **list_b, t_push **list_a)
 	if_remove_list(list_b, data);
 }
 
-void	push(t_push **list_a, t_push **list_b, int choice)
+void			push(t_push **list_a, t_push **list_b, int choice)
 {
 	if (choice == 0)
 		push_b(list_a, list_b);

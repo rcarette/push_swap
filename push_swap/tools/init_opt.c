@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 11:22:25 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/05 03:42:56 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/08 14:32:32 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void			init_opt(t_opt *opt)
 {
-	opt->descending = 0;
 	opt->instruc = 0;
 	opt->time = 0;
 	opt->visualization = 0;
 	opt->time_opt = 1;
+	opt->desc = 0;
 }

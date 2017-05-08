@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 15:48:32 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/04 21:09:21 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/08 12:23:33 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void		swap(int *s1, int *s2)
 {
 	int		temporary;
-
 
 	temporary = *s1;
 	*s1 = *s2;

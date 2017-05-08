@@ -6,39 +6,24 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 12:12:38 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/07 15:49:57 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/08 14:32:54 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-static int		check_data(const char *str)
+static int		fuck_norm(const char **av, int ite, t_push **list)
 {
-	int			ite;
 	long long	data;
 
-	ite = -1;
-	ite += (str[0] == '-') ? 1 : 0;
-	ite += (str[0] == '+') ? 1 : 0;
-	while (str[++ite])
-		if (!(ft_isdigit(str[ite])))
-			return (0);
-	data = ft_atoi(str);
+	if (!(check_data(av[ite])))
+		return (0);
+	data = ft_atoi(av[ite]);
 	if (data < MIN_INT || data > MAX_INT)
 		return (0);
-	return (1);
-}
-
-static int		check_data_list(t_push *list, int data)
-{
-	if (lenght_list(list) == 0)
-		return (1);
-	while (list)
-	{
-		if (list->value == data)
-			return (0);
-		list = list->next;
-	}
+	if (!(check_data_list(*list, data)))
+		return (0);
+	push_back(list, data);
 	return (1);
 }
 
@@ -75,10 +60,10 @@ static int		ft_getoption(char *s1, t_opt *opt)
 	i = 0;
 	while (s1[++i])
 	{
-		if (s1[i] == 'd')
-			opt->descending = 1;
-		else if (s1[i] == 'l')
+		if (s1[i] == 'l')
 			opt->last_instruction = 1;
+		else if (s1[i] == 'd')
+			opt->desc = 1;
 		else if (s1[i] == 't')
 		{
 			opt->time = 1;
@@ -98,7 +83,6 @@ static int		ft_getoption(char *s1, t_opt *opt)
 int				get_arguments(const char **av, t_push **list, t_opt *opt)
 {
 	int				ite;
-	long long		data;
 
 	ite = 0;
 	while (av[++ite])
@@ -118,14 +102,8 @@ int				get_arguments(const char **av, t_push **list, t_opt *opt)
 		}
 		else
 		{
-			if (!(check_data(av[ite])))
+			if (!(fuck_norm(av, ite, list)))
 				return (0);
-			data = ft_atoi(av[ite]);
-			if (data < MIN_INT || data > MAX_INT)
-				return (0);
-			if (!(check_data_list(*list, data)))
-				return (0);
-			push_back(list, data);
 		}
 	}
 	return (1);

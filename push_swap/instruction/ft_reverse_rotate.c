@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 18:47:50 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/04 21:04:14 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/08 12:23:18 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,4 @@ void			ft_reverse_rotate(t_push **list_a, t_push **list_b, int choice)
 		ft_reverse_rotate_a(list_a);
 	else
 		ft_reverse_rotate_b(list_b);
-
 }

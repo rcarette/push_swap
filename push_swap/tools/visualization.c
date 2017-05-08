@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 06:22:01 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/07 21:22:24 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/08 13:18:22 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void			display_top_stack(void)
 	write(1, "\033[0;0m", ft_strlen("\033[0;0m"));
 	write(1, "   ", 3);
 	write(1, "\033[31;1m", ft_strlen("\033[31;1m"));
-	write(1, "|____PILE B____|\n",17);
+	write(1, "|____PILE B____|\n", 17);
 	write(1, "\033[0;0m", ft_strlen("\033[0;0m"));
 }
 
@@ -57,7 +57,7 @@ static void			fuck_norm(void)
 	display_separator("\033[31;1m");
 }
 
-void			visualization(t_push *list_a, t_push *list_b, t_opt *opt)
+void				visualization(t_push *list_a, t_push *list_b, t_opt *opt)
 {
 	(opt->last_instruction) ? write(1, "\n", 1) : 0;
 	display_top_stack();

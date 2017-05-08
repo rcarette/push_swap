@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 08:55:41 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/03 23:22:50 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/08 12:25:50 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		returns_pos_array(int *board, int size, int data)
 {
 	int		i;
-	
+
 	if (!size || size == 0)
 		return (-1);
 	i = 0;

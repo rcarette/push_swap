@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_start_ascending.c                               :+:      :+:    :+:   */
+/*   ft_start_descending.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/03 14:31:52 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/08 16:30:00 by rcarette         ###   ########.fr       */
+/*   Created: 2017/05/08 16:20:18 by rcarette          #+#    #+#             */
+/*   Updated: 2017/05/08 16:57:30 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void		ft_pos_max_asen(t_push **list_a, t_push **list_b, int pos_max)
 	{
 		ft_rotate(list_a, list_b, 0);
 		write(1, "ra\n", 3);
-		if ((*list_a)->value > (*list_a)->next->value)
+		if ((*list_a)->value < (*list_a)->next->value)
 		{
 			swap_pile(list_a);
 			write(1, "sa\n", 3);
@@ -28,7 +28,7 @@ static void		ft_pos_max_asen(t_push **list_a, t_push **list_b, int pos_max)
 	{
 		ft_reverse_rotate(list_a, list_b, 0);
 		write(1, "rra\n", 4);
-		if ((*list_a)->value > (*list_a)->next->value)
+		if ((*list_a)->value < (*list_a)->next->value)
 		{
 			swap_pile(list_a);
 			write(1, "sa\n", 3);
@@ -36,23 +36,20 @@ static void		ft_pos_max_asen(t_push **list_a, t_push **list_b, int pos_max)
 	}
 }
 
-static void		ft_tree_elements_ascending(t_push **list_a, t_push **list_b, \
-																	t_opt *opt)
+void			ft_tree_elements_descending(t_push **list_a, t_push **list_b)
 {
-	int		max_value;
+	int		min_value;
 	int		*board;
 	int		pos_max;
 
-	if (opt->desc == 1)
-		return (ft_tree_elements_descending(list_a, list_b));
 	board = transforms_list_to_array(*list_a);
-	max_value = returns_big_value_array(board, lenght_list(*list_a));
-	pos_max = returns_pos_array(board, lenght_list(*list_a), max_value);
+	min_value = returns_small_value_array(board, lenght_list(*list_a));
+	pos_max = returns_pos_array(board, lenght_list(*list_a), min_value);
 	if (pos_max == 1 || pos_max == 2)
 		ft_pos_max_asen(list_a, list_b, pos_max);
 	else
 	{
-		if ((*list_a)->value > (*list_a)->next->value)
+		if ((*list_a)->value < (*list_a)->next->value)
 		{
 			swap_pile(list_a);
 			write(1, "sa\n", 3);
@@ -63,13 +60,13 @@ static void		ft_tree_elements_ascending(t_push **list_a, t_push **list_b, \
 
 static void		stock_two_small_value(t_push **list_a, t_push **list_b)
 {
-	int		min_value;
+	int		value;
 	int		pos;
 	int		*board;
 
 	board = transforms_list_to_array(*list_a);
-	min_value = returns_small_value_array(board, lenght_list(*list_a));
-	pos = returns_pos_array(board, lenght_list(*list_a), min_value);
+	value = returns_big_value_array(board, lenght_list(*list_a));
+	pos = returns_pos_array(board, lenght_list(*list_a), value);
 	free(board);
 	if (pos == 4 || pos == 5)
 	{
@@ -90,31 +87,17 @@ static void		stock_two_small_value(t_push **list_a, t_push **list_b)
 	write(1, "pb\n", 3);
 }
 
-static void		ft_five_elements_ascending(t_push **list_a, t_push **list_b, \
-																	t_opt *opt)
+void			ft_five_elements_descending(t_push **list_a, t_push **list_b)
 {
 	int		i;
 
 	i = 2;
-	if (opt->desc == 1)
-		return (ft_five_elements_descending(list_a, list_b));
 	stock_two_small_value(list_a, list_b);
 	stock_two_small_value(list_a, list_b);
-	ft_tree_elements_ascending(list_a, list_b, opt);
+	ft_tree_elements_descending(list_a, list_b);
 	while (i--)
 	{
 		push(list_a, list_b, 1);
 		write(1, "pa\n", 3);
 	}
-}
-
-void			ft_start_ascending(t_push **list_a, t_push **list_b,\
-																	t_opt *opt)
-{
-	if (lenght_list(*list_a) == 3 || lenght_list(*list_a) == 2)
-		ft_tree_elements_ascending(list_a, list_b, opt);
-	else if (lenght_list(*list_a) == 4 || lenght_list(*list_a) == 5)
-		ft_five_elements_ascending(list_a, list_b, opt);
-	else
-		ft_resolve_ascending(list_a, list_b, opt);
 }

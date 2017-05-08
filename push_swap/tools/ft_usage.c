@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 14:04:44 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/03 14:08:11 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/08 12:10:47 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void			ft_usage(t_push **list_a)
 {
 	(list_a != NULL) ? clear_list(list_a) : 0;
-
 	write(1, "\033[31;1m", ft_strlen("\033[31;1m"));
 	write(1, "\033[0;0m", ft_strlen("\033[0;0m"));
 	write(1, "\033[32;1m", ft_strlen("\033[32;1m"));

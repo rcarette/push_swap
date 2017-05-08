@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 18:22:04 by rcarette          #+#    #+#             */
-/*   Updated: 2017/03/28 19:00:08 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/08 12:27:04 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int				get_next_line(int const fd, char **line)
 	static char		*stock = NULL;
 	int				ret;
 	char			board[BUFF_SIZE + 1];
-	
+
 	if (fd < 0 || !line || BUFF_SIZE <= 0)
 		return (-1);
 	if (!(*line = malloc(sizeof(char) * BUFF_SIZE)))

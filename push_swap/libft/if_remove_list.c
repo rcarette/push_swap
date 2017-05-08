@@ -6,13 +6,13 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 13:01:59 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/02 12:29:18 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/08 12:25:24 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int			check_last(t_push **list, int data)
+static int		check_last(t_push **list, int data)
 {
 	t_push		*temporary;
 	t_push		*prev;
@@ -32,7 +32,7 @@ static int			check_last(t_push **list, int data)
 	return (0);
 }
 
-static int			check_first(t_push **list, int data)
+static int		check_first(t_push **list, int data)
 {
 	t_push		*delete;
 
@@ -46,12 +46,12 @@ static int			check_first(t_push **list, int data)
 	return (0);
 }
 
-static int			check_middle(t_push **list, int data)
+static int		check_middle(t_push **list, int data)
 {
 	t_push		*temporary;
 	t_push		*prev;
 	t_push		*next;
-	
+
 	temporary = *list;
 	while (temporary)
 	{

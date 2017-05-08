@@ -6,12 +6,12 @@
 #    By: rcarette <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/26 12:16:43 by rcarette          #+#    #+#              #
-#    Updated: 2017/05/07 23:46:51 by rcarette         ###   ########.fr        #
+#    Updated: 2017/05/08 17:03:24 by rcarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = checker
-FLAGS = -g -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -fsanitize=address
 CC = clang $(FLAGS)
 INC = ../inc/
 LIBFT = ../libft/
@@ -27,6 +27,8 @@ SRCS = checker.c\
 	   ../tools/init_opt.c\
 	   ../tools/ft_usage.c\
 	   ../tools/visualization.c\
+	   ../checker_src/error.c\
+	   ../ps_src/check_data.c\
 
 OBJS = $(SRCS:%.c=%.o)
 
@@ -36,6 +38,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) -o $(NAME) $(SRCS) $(ALL_INC) -L $(LIBFT) -lft
+	mv $(NAME) ../
 
 %.o: %.c
 	$(CC) -o $@ -c $< $(ALL_INC)
@@ -46,6 +49,6 @@ clean:
 
 fclean: clean
 	@make fclean -C $(LIBFT)
-	rm -f $(NAME)
+	rm -f ../$(NAME)
 
 re: fclean all
