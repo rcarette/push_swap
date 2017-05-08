@@ -6,11 +6,12 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 12:32:48 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/08 12:33:54 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/09 01:00:33 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
+
 
 int		check_data(const char *str)
 {
@@ -23,6 +24,8 @@ int		check_data(const char *str)
 	while (str[++ite])
 		if (!(ft_isdigit(str[ite])))
 			return (0);
+	if (ft_strlen(str) > 12)
+		return (0);
 	data = ft_atoi(str);
 	if (data < MIN_INT || data > MAX_INT)
 		return (0);

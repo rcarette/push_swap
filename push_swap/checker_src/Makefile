@@ -6,7 +6,7 @@
 #    By: rcarette <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/26 12:16:43 by rcarette          #+#    #+#              #
-#    Updated: 2017/05/08 17:51:18 by rcarette         ###   ########.fr        #
+#    Updated: 2017/05/09 01:11:01 by rcarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ OBJS = $(SRCS:%.c=%.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) -o $(NAME) $(SRCS) $(ALL_INC) -L $(LIBFT) -lft
+	$(CC) -g -o $(NAME) $(SRCS) $(ALL_INC) -L $(LIBFT) -lft
 	mv $(NAME) ../
 
 %.o: %.c

@@ -6,7 +6,7 @@
 #    By: rcarette <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/23 20:59:07 by rcarette          #+#    #+#              #
-#    Updated: 2017/04/30 16:13:36 by rcarette         ###   ########.fr        #
+#    Updated: 2017/05/09 01:10:44 by rcarette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,4 +33,3 @@ fclean: clean
 		make fclean -C $(PUSHSWAP)
 		make fclean -C $(CHECKER)
 
-re: fclean all

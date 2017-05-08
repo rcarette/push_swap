@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 11:37:24 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/08 17:44:08 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/09 01:14:24 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int				ft_check_directive(char *directive)
 {
-	static char		board[] = {"sa sb ss pa pb ra rb rr rra rrb rrr"};
+	static char		board[] = {"sa sb ss pa pb ra rb rr rra rrb rrr\0"};
 	char			**board_directive;
 	int				ite;
 
 	ite = -1;
 	board_directive = ft_strsplit(board, ' ');
-	while (board_directive[++ite])
+	while (++ite < 11)
 		if (!ft_strcmp(directive, board_directive[ite]))
 		{
 			clear_tab(board_directive);

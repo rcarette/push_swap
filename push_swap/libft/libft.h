@@ -6,7 +6,7 @@
 /*   By: rcarette <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/13 02:51:56 by rcarette          #+#    #+#             */
-/*   Updated: 2017/05/08 10:28:30 by rcarette         ###   ########.fr       */
+/*   Updated: 2017/05/09 00:56:15 by rcarette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 # define MIN_INT -2147483648
 # define ABS(x) (((x) < 0) ? -(x) : (x))
 
-
 typedef struct		s_push
 {
 	int				value;
@@ -37,10 +36,6 @@ typedef struct		s_push
 	int				rotate_bottom;
 	struct s_push	*next;
 }					t_push;
-
-/*
- * PS_SRC
- */
 
 void				push_back(t_push **list, int data);
 void				clear_list(t_push **list);
@@ -50,7 +45,6 @@ t_push				*creat_new_list(int data);
 void				push_front(t_push **list, int data);
 void				if_remove_list(t_push **list, int data);
 int					search_elem(t_push *list, int data);
-
 
 void				*ft_memset(void *s, int c, size_t n);
 void				*ft_memcpy(void *dest, const void *src, size_t n);
@@ -115,5 +109,5 @@ int					is_sorted_array(int *board, int size);
 void				print_array(int *board, int size);
 int					is_sorted_ascending_array(int *board, int size);
 int					is_sorted_descending_array(int *board, int size);
-int					getintsize(int data);
+int					getintsize(long long data);
 #endif
